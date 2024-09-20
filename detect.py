@@ -318,6 +318,9 @@ def run(
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
     if update:
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
+    
+    # 推論結果を返す
+    return pred, save_path
 
 
 def parse_opt():
@@ -429,7 +432,7 @@ def main(opt):
     ```
     """
     check_requirements(ROOT / "requirements.txt", exclude=("tensorboard", "thop"))
-    run(**vars(opt))
+    return run(**vars(opt))  # pred と save_pathを 返すように変更
 
 
 if __name__ == "__main__":
